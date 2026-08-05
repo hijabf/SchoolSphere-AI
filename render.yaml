@@ -2,9 +2,12 @@ services:
   - type: web
     name: schoolsphere-api
     runtime: python
+    plan: free
+    region: oregon
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: DEMO_MODE
         value: "true"
@@ -14,5 +17,5 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
-      - key: DATABASE_URL
-        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.0"
